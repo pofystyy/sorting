@@ -94,6 +94,10 @@ end
 # START HERE
 class ItemsHandler
 
+  PaginateParamError = Class.new StandardError
+  NoItemsError       = Class.new StandardError
+  NoFieldError       = Class.new StandardError
+
   def initialize(cars)
      @cars = 100.times.inject([]) do |arr, i| arr.push(
       id: i,
