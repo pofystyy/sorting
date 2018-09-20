@@ -139,4 +139,8 @@ class ItemsHandler
       @cars.sort_by { |key, v| key[:price] }
     end
   end
+
+  def filter(*params)
+    @cars.select{ |key| key[0] == params[1] }
+  end
 end
