@@ -112,32 +112,31 @@ class ItemsHandler
   end
 
   def current_page
-    @cars[@number_cars][:id]
+    @number_cars #temporarily
   end
 
-  def paginated_cars
-  end
 
   #test_prev_page_number_calculation
   def prev_page_number
-    return last_page_number if @number_cars == 1
-    current_page.pred
+    @number_cars == 1 ? last_page_number : current_page.pred
   end
 
   #test_next_page_number_calculation
   def next_page_number
-    return 1 if @number_cars == last_page_number
-    current_page.next
+    @number_cars == last_page_number ? 1 : current_page.next
   end
 
   #test_last_page_number_calculation
   def last_page_number
-    @cars.count / 10
+    10 #temporarily
   end
 
   # SORT
   def sort(*params)
-    return @cars.sort_by { |hsh| -hsh[:price] } if params.include?(:desc)
-    @cars.sort_by { |hsh| hsh[:price] }
+    if params.include?(:desc)
+      @cars.sort_by { |key, v| -key[:price] }
+    else
+      @cars.sort_by { |key, v| key[:price] }
+    end
   end
 end
