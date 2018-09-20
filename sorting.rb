@@ -143,4 +143,8 @@ class ItemsHandler
   def filter(*params)
     @cars.select{ |key| key[0] == params[1] }
   end
+
+  def items
+    @cars
+  end
 end
