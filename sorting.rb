@@ -94,9 +94,9 @@ end
 # START HERE
 class ItemsHandler
 
-  PaginateParamError = Class.new StandardError
-  NoItemsError       = Class.new StandardError
-  NoFieldError       = Class.new StandardError
+  class PaginateParamError < StandardError; end
+  class NoItemsError       < StandardError; end
+  class NoFieldError       < StandardError; end
 
   def initialize(*cars)
      @cars = cars
