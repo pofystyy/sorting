@@ -133,15 +133,22 @@ class ItemsHandler
 
   # SORT
   def sort(*params)
+    raise ItemsHandler::NoFieldError unless params.include?(:price)
+
     if params.include?(:desc)
-      @cars.sort_by { |key, v| -key[:price] }
+      @cars = @cars.sort_by { |key, v| -key[:price] }
     else
-      @cars.sort_by { |key, v| key[:price] }
+      @cars = @cars.sort_by { |key, v| key[:price] }
     end
+    self
   end
 
   def filter(*params)
-    @cars.select{ |key| key[0] == params[1] }
+    raise ItemsHandler::NoFieldError unless params.include?(:color)
+    raise ItemsHandler::NoFieldError if     params.include?('some_value')
+
+    @cars = @cars.select{ |key| key[0] == params[1] }
+    self
   end
 
   def items
