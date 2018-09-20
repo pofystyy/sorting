@@ -98,13 +98,8 @@ class ItemsHandler
   NoItemsError       = Class.new StandardError
   NoFieldError       = Class.new StandardError
 
-  def initialize(cars)
-     @cars = 100.times.inject([]) do |arr, i| arr.push(
-      id: i,
-      price: rand(1000..25000),
-      color: [:red, :blue, :white, :yellow, :black][rand(5)]
-    )
-    end
+  def initialize(*cars)
+     @cars = cars
   end
 
   # PAGINATE
