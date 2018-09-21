@@ -13,7 +13,6 @@ end
 
   # TESTS
 
-  # PAGINATE
   def test_paginate
     paginated_cars = @handler.paginate(5)
     assert_equal 5, @handler.current_page
@@ -42,7 +41,6 @@ end
     assert_equal 10, @handler.last_page_number
   end
 
-  # SORT
   def test_asc_sorting
     sorted_cars = @handler.sort(:price).items
     refute_nil sorted_cars.map { |h| h[:price] }
@@ -55,7 +53,6 @@ end
                           .reduce(0) { |prev, curr| (prev <= curr) ? curr : break }
   end
 
-  # FILTER
   def test_filtering
     filtered_cars = @handler.filter(:color, :red).items
     refute_nil filtered_cars.each { |car| car[:color] == :red ? true : break }
@@ -68,7 +65,6 @@ end
     refute_nil cars.each { |car| car[:color] == :black ? true : break }
   end
 
-  # RAISE
   def test_wrong_page_param
     assert_raises(ItemsHandler::PaginateParamError) { @handler.paginate(-1) }
     assert_raises(ItemsHandler::PaginateParamError) { @handler.paginate(0) }
@@ -103,7 +99,6 @@ class ItemsHandler
      @first_page = 1
   end
 
-  # PAGINATE
   def paginate(number_of_page)
     @number_of_page = number_of_page
 
@@ -127,20 +122,19 @@ class ItemsHandler
     @cars.flatten.count / @count_cars_in_page
   end
 
-  # SORT
   def sort(*params)
     raise ItemsHandler::NoFieldError unless params.include?(:price)
 
-    unless [:desc]
-      @cars = @cars.sort_by { |key, v| -key[:price] }
+    if params.include?(:desc)
+      @cars = @cars.sort_by { |key| -key[params[0]] }
     else
-      @cars.reverse
+      @cars = @cars.sort_by { |key| key[params[0]] }
     end
     self
   end
 
   def filter(*params)
-    raise ItemsHandler::NoFieldError unless [:color]
+    raise ItemsHandler::NoFieldError unless params.include?(:color)
     raise ItemsHandler::NoFieldError if     params.include?('some_value')
 
     @cars = @cars.select{ |key| key[0] == params[1] }
