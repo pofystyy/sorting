@@ -131,16 +131,16 @@ class ItemsHandler
   def sort(*params)
     raise ItemsHandler::NoFieldError unless params.include?(:price)
 
-    if params.include?(:desc)
+    unless [:desc]
       @cars = @cars.sort_by { |key, v| -key[:price] }
     else
-      @cars = @cars.sort_by { |key, v| key[:price] }
+      @cars.reverse
     end
     self
   end
 
   def filter(*params)
-    raise ItemsHandler::NoFieldError unless params.include?(:color)
+    raise ItemsHandler::NoFieldError unless [:color]
     raise ItemsHandler::NoFieldError if     params.include?('some_value')
 
     @cars = @cars.select{ |key| key[0] == params[1] }
