@@ -15,7 +15,7 @@ end
 
   def test_paginate
     paginated_cars = @handler.paginate(5)
-    assert_equal 5, @handler.current_page
+    assert_equal 10, @handler.current_page.count
     #assert_equal 40, paginated_cars[0][:id]
   end
 
