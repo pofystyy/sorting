@@ -44,13 +44,13 @@ end
   def test_asc_sorting
     sorted_cars = @handler.sort(:price).items
     refute_nil sorted_cars.map { |h| h[:price] }
-                          .reduce(25000) { |prev, curr| (prev >= curr) ? curr : break }
+                          .reduce(0) { |prev, curr| (prev <= curr) ? curr : break }
   end
 
   def test_desc_sorting
     sorted_cars = @handler.sort(:price, :desc).items
     refute_nil sorted_cars.map { |h| h[:price] }
-                          .reduce(0) { |prev, curr| (prev <= curr) ? curr : break }
+                          .reduce(25000) { |prev, curr| (prev >= curr) ? curr : break }
   end
 
   def test_filtering
@@ -61,7 +61,7 @@ end
   def test_sorting_with_filtering
     cars = @handler.sort(:price).filter(:color, :black).items
     refute_nil cars.map { |h| h[:price] }
-                   .reduce(25000) { |prev, curr| (prev >= curr) ? curr : break }
+                   .reduce(0) { |prev, curr| (prev <= curr) ? curr : break }
     refute_nil cars.each { |car| car[:color] == :black ? true : break }
   end
 
