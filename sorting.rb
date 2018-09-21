@@ -107,9 +107,7 @@ class ItemsHandler
   end
 
   def current_page
-    current_page = []
-    @cars.flatten.each_slice(@count_cars_in_page) { |page| current_page << page }
-    current_page[@number_of_page - 1]
+    @number_of_page
   end
 
   def prev_page_number
