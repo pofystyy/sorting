@@ -137,7 +137,7 @@ class ItemsHandler
     raise ItemsHandler::NoFieldError unless params.include?(:color)
     raise ItemsHandler::NoFieldError if     params.include?('some_value')
 
-    @cars = @cars.select{ |key| key[0] == params[1] }
+    @cars = @cars.select{ |key| key[params[0]] == params[1] }
     self
   end
 
