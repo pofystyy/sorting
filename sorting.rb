@@ -93,7 +93,7 @@ class ItemsHandler
   class NoItemsError       < StandardError; end
   class NoFieldError       < StandardError; end
 
-  def initialize(*cars)
+  def initialize(cars)
      @cars = cars
      @count_cars_in_page = 10
      @first_page = 1
