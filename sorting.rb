@@ -104,30 +104,25 @@ class ItemsHandler
   end
 
   # PAGINATE
-  #test_paginate
-  def paginate(number_cars)
-    @number_cars = number_cars
+  def paginate(number_of_page)
+    @number_of_page = number_of_page
 
-    raise ItemsHandler::PaginateParamError if @number_cars < @first_page
-    raise ItemsHandler::NoItemsError       if @number_cars > last_page_number
+    raise ItemsHandler::PaginateParamError if @number_of_page < @first_page
+    raise ItemsHandler::NoItemsError       if @number_of_page > last_page_number
   end
 
   def current_page
-    @number_cars #temporarily
+    @number_cars
   end
 
-
-  #test_prev_page_number_calculation
   def prev_page_number
-    @number_cars == @first_page ? last_page_number : current_page.pred
+    @number_of_page == @first_page ? last_page_number : current_page.pred
   end
 
-  #test_next_page_number_calculation
   def next_page_number
-    @number_cars == last_page_number ? @first_page : current_page.next
+    @number_of_page == last_page_number ? @first_page : current_page.next
   end
 
-  #test_last_page_number_calculation
   def last_page_number
     10 #temporarily
   end
