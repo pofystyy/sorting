@@ -112,7 +112,7 @@ class ItemsHandler
   end
 
   def current_page
-    @number_cars
+    @number_of_page
   end
 
   def prev_page_number
