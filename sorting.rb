@@ -124,7 +124,7 @@ class ItemsHandler
   end
 
   def last_page_number
-    10 #temporarily
+    @cars.flatten.count / @count_cars_in_page
   end
 
   # SORT
