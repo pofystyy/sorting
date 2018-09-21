@@ -111,11 +111,11 @@ class ItemsHandler
   end
 
   def prev_page_number
-    @number_of_page == @first_page ? last_page_number : current_page.pred
+    @number_of_page == @first_page ? last_page_number : @number_of_page.pred
   end
 
   def next_page_number
-    @number_of_page == last_page_number ? @first_page : current_page.next
+    @number_of_page == last_page_number ? @first_page : @number_of_page.next
   end
 
   def last_page_number
